@@ -1,4 +1,7 @@
 spring:
   kafka:
-#    bootstrap-servers: localhost:9092
-    bootstrap-servers: 192.168.27.151:9092
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic:
+#    bootstrap-servers: 192.168.27.151:9092
+topicName: test

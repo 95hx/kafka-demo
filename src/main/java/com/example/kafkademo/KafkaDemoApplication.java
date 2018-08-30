@@ -26,29 +26,29 @@ public class KafkaDemoApplication {
 
     @RequestMapping("/{value}")
     String hello(@PathVariable(value = "value") String value) {
-        producer.send("test", String.valueOf(value.hashCode()), value);
-        return "生产者发送消息" + value + "到test";
+        producer.send("test"+value, String.valueOf(value.hashCode()), value);
+        return "生产者发送消息" + value + "到test"+value;
     }
 
     @EnableKafka
     public static class Listener {
         protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-        @KafkaListener(groupId = "test",topics = {"test"})
+        @KafkaListener(groupId = "test1",topics = {"${topicName}","test2","test3"})
         public void listen1(ConsumerRecord<?, ?> record) {
             System.out.println();
             logger.info("listen1");
             logger.info("来自kafka的key: " + record.key());
             logger.info("来自kafka的value: " + record.value().toString());
         }
-        @KafkaListener(groupId = "test",topics = {"test"})
+        @KafkaListener(groupId = "test2",topics = {"test","test4"})
         public void listen2(ConsumerRecord<?, ?> record) {
             System.out.println();
             logger.info("listen2");
             logger.info("来自kafka的key: " + record.key());
             logger.info("来自kafka的value: " + record.value().toString());
         }
-        @KafkaListener(groupId = "test",topics = {"test"})
+        @KafkaListener(groupId = "test2",topics = {"test","test5"})
         public void listen3(ConsumerRecord<?, ?> record) {
             System.out.println();
             logger.info("listen3");
