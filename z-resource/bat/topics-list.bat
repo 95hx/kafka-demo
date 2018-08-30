@@ -1,0 +1,1 @@
+start C:\Users\hx\Pictures\kafka\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181

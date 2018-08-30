@@ -2,6 +2,11 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     template:
-      default-topic:
+      default-topic: test
 #    bootstrap-servers: 192.168.27.151:9092
-topicName: test
+#    consumer.group-id: testGroup
+#    consumer.auto-offset-reset: earliest
+#    consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#    consumer.properties.spring.json.trusted.packages: com.example.kafkademo.config.Kafka
+#    producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+topicName: test1

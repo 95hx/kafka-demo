@@ -1,0 +1,1 @@
+start C:\Users\hx\Pictures\kafka\bin\windows\kafka-consumer-groups.bat

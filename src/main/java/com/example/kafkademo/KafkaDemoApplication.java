@@ -1,5 +1,6 @@
 package com.example.kafkademo;
 
+import com.google.gson.Gson;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 @RestController
 public class KafkaDemoApplication {
 
     @Autowired
-    KafkaTemplate<String, String> producer;
+    KafkaTemplate<Object, String> producer;
+    User user = new User(1L, "a320", "hx", 23, new BigDecimal(112));
 
     public static void main(String[] args) {
         SpringApplication.run(KafkaDemoApplication.class, args);
@@ -26,34 +30,30 @@ public class KafkaDemoApplication {
 
     @RequestMapping("/{value}")
     String hello(@PathVariable(value = "value") String value) {
-        producer.send("test"+value, String.valueOf(value.hashCode()), value);
-        return "生产者发送消息" + value + "到test"+value;
+        //对象转json发送
+        producer.send("test" + value, new Gson().toJson(user));
+        return "生产者发送消息" + user + "到test" + value;
     }
 
     @EnableKafka
     public static class Listener {
         protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-        @KafkaListener(groupId = "test1",topics = {"${topicName}","test2","test3"})
+        @KafkaListener(groupId = "test1", topics = {"${topicName}", "test2", "test3"})
         public void listen1(ConsumerRecord<?, ?> record) {
-            System.out.println();
-            logger.info("listen1");
-            logger.info("来自kafka的key: " + record.key());
-            logger.info("来自kafka的value: " + record.value().toString());
+            logger.info("Consumer1来自kafka的" + "value:" + record.value().toString());
         }
-        @KafkaListener(groupId = "test2",topics = {"test","test4"})
-        public void listen2(ConsumerRecord<?, ?> record) {
-            System.out.println();
-            logger.info("listen2");
-            logger.info("来自kafka的key: " + record.key());
-            logger.info("来自kafka的value: " + record.value().toString());
+
+        @KafkaListener(groupId = "test2", topics = {"test3", "test4", "test5"})
+        public void Consumer2(ConsumerRecord<?, ?> record) {
+            logger.info("Consumer2来自kafka的" + "value:" + record.value().toString());
         }
-        @KafkaListener(groupId = "test2",topics = {"test","test5"})
-        public void listen3(ConsumerRecord<?, ?> record) {
-            System.out.println();
-            logger.info("listen3");
-            logger.info("来自kafka的key: " + record.key());
-            logger.info("来自kafka的value: " + record.value().toString());
+
+        @KafkaListener(groupId = "test2", topics = {"test5", "test6", "test7"})
+        public void listen3(ConsumerRecord<?, ?> record) throws Exception {
+            //json转对象
+            logger.info(new Gson().fromJson(record.value().toString(), User.class).toString());
+//            logger.info("Consumer3来自kafka的" + "value:" + record.value().toString());
         }
     }
 }
