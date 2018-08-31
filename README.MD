@@ -93,3 +93,6 @@
 * 顺序性
 
 
+[便捷启动脚本](https://github.com/95hx/kafka-demo/tree/master/z-resource/script/windows)
+
+
