@@ -11,4 +11,8 @@
 
 
 # log_consumer
-[](z-resource/log_consumer.png)
+![](z-resource/log_consumer.png)
+
+
+# zookeeper_register_center
+![](z-resource/zookeeper-register-center.png)
