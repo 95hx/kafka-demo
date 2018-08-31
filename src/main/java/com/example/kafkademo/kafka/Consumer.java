@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Consumer {
-
-    @KafkaListener(topics = "testTopic")
+    @KafkaListener(topics = "test")
     public void processMessage(SampleMessage message) {
         System.out.println("Received sample message [" + message + "]");
     }
