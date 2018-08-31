@@ -1,4 +1,4 @@
-# [Welcome to 95hx kafka tutorial](https://github.com/95hx/kafka-demo) 
+# [Welcome to 95hx kafka notebook](https://github.com/95hx/kafka-demo) 
 
 
 
