@@ -1,4 +1,4 @@
-package com.example.kafkademo.kafka;
+package com.example.kafkademo.kafka.consumer.impl;
 
 /**
  * @author hx
@@ -8,15 +8,18 @@ package com.example.kafkademo.kafka;
  * @date 2018/8/2220:07
  */
 
+import com.example.kafkademo.kafka.consumer.Consumer;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConsumerA {
+public class ConsumerA implements Consumer {
 
-    @KafkaListener(topics = "__consumer_offsets" )
+    @Override
+    @KafkaListener(topics = "__consumer_offsets")
     public void processMessage(Object message) {
-        System.out.println("Received offset message [" + message + "]");
+        System.out.println("A Received offset message [" + message + "]");
     }
+
 
 }
