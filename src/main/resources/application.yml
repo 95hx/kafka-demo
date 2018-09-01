@@ -1,11 +1,12 @@
 spring:
   kafka:
 #    bootstrap-servers: localhost:9092
-    consumer.group-id: testGroup
-    consumer.auto-offset-reset: earliest
-    consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-    consumer.properties.spring.json.trusted.packages: com.example.kafkademo.kafka
-    producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: testGroup
+      auto-offset-reset: earliest
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      properties.spring.json.trusted.packages: com.example.kafkademo.kafka
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     template:
       default-topic: test
-#topicName: test1
