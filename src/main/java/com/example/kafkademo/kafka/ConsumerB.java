@@ -11,7 +11,7 @@ package com.example.kafkademo.kafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-@Component(value = "consumer_topic")
+@Component
 public class ConsumerB {
 
     @KafkaListener(topics = "test")

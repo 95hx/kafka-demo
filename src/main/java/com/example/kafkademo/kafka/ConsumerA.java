@@ -11,11 +11,12 @@ package com.example.kafkademo.kafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-@Component(value = "consumer_offset")
+@Component
 public class ConsumerA {
+
     @KafkaListener(topics = "__consumer_offsets" )
     public void processMessage(Object message) {
-        System.out.println("Received sample message [" + message + "]");
+        System.out.println("Received offset message [" + message + "]");
     }
 
 }
