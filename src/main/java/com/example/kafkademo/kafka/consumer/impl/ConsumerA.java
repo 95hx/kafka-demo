@@ -10,12 +10,14 @@ package com.example.kafkademo.kafka.consumer.impl;
 
 import com.example.kafkademo.kafka.consumer.Consumer;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ConsumerA implements Consumer {
 
     @Override
+    @SendTo
     @KafkaListener(topics = "__consumer_offsets")
     public void processMessage(Object message) {
         System.out.println("A Received offset message [" + message + "]");

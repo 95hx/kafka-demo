@@ -95,4 +95,8 @@
 
 [便捷启动脚本](https://github.com/95hx/kafka-demo/tree/master/z-resource/script/windows)
 
+### kafka-clients源码分析
+
+* [KafkaAdminClient](docs/KafkaAdminClinet.md)
+
 
