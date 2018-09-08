@@ -1,5 +1,6 @@
 package com.example.kafkademo.test;
 
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaOperations.OperationsCallback;
+import org.springframework.kafka.core.KafkaOperations;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -37,6 +40,10 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        template.executeInTransaction((OperationsCallback<String, String, Object>) operations -> {
+            operations.send("test", "data");
+            return true;
+        });
         ListenableFuture<SendResult<String, String>> future = this.template.send("myTopic", "foo1");
         /**
          * non block get result

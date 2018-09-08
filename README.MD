@@ -97,6 +97,7 @@
 
 ### kafka-clients源码分析
 
-* [KafkaAdminClient](docs/KafkaAdminClinet.md)
+* [KafkaClient](docs/KafkaClient.md)
+* [SpringKafka](docs/SpringKafka.md)
 
 
