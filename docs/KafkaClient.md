@@ -3,7 +3,7 @@
 * [package org.apache.kafka.clients.producer,用来生产消息](./Producer.class)
 * [package org.apache.kafka.clients.consumer,用来消费消息](./Consumer.java)
 
-![kafka](../z-resource/kafkaClient.PNG)
+![kafka](/z-resource/kafkaClient.PNG)
 
 
 
